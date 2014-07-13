@@ -1,0 +1,54 @@
+
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin10.8.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.63 (6734) x86_64-apple-darwin10.8.0]
+
+[Workspace restored from /Users/sudhir/.RData]
+[History restored from /Users/sudhir/.Rapp.history]
+
+> 
+> rm(list=ls())
+> # the data file shoule be in working directory
+> # there are nulls in file. Good idea to set class to characters to import
+> power <- read.table("household_power_consumption.txt",header = TRUE,sep = ";", colClasses = "character")
+Error in file(file, "rt") : cannot open the connection
+In addition: Warning message:
+In file(file, "rt") :
+  cannot open file 'household_power_consumption.txt': No such file or directory
+> 
+> power[,1] <- as.Date(power$Date, "%d/%m/%y")
+Error in power$Date : object of type 'closure' is not subsettable
+> psub <- subset(power, power$Date %in% as.Date(c("2007-02-01","2007-02-02")))
+Error in power$Date : object of type 'closure' is not subsettable
+> 
+> # set the column class of 'Global_active_power' to numeric
+> psub[,3] <- as.numeric(psub[,3])
+Error: object 'psub' not found
+> 
+> hist(psub[,3], main = "Global Active Power", xlab = "Global Active Power (kilowatts)", ylab = "Frequency", col = "Red")
+Error in hist(psub[, 3], main = "Global Active Power", xlab = "Global Active Power (kilowatts)",  : 
+  object 'psub' not found
+> dev.copy(png, file = "plot.png")
+Error in dev.copy(png, file = "plot.png") : 
+  cannot copy from the null device
+> dev.off()
+Error in dev.off() : cannot shut down device 1 (the null device)
+> 
+> setwd("/Users/sudhir/Desktop/Coursera/4/ExData_Plotting1")
+> 
